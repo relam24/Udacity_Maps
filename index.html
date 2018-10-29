@@ -1,12 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-	<head>
-		<link rel="stylesheet" href="main.css">
-		<script src="app.js" charset="utf-8"></script>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-		<h1>test</h1>
-	</body>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.7413549, lng: -73.9980244},
+          zoom: 8
+        });
+		var tribeca = {lat: 40.719526, lng: -74.0089934};
+		var marker = new google.maps.Marker({
+			position: tribeca,
+			map: map,
+			title: 'First Marker'
+		});
+		var infowindow = new google.maps.InfoWindow({
+			content: 'Do you ever feel like an Infowindow, floating through the wind.'
+		});
+		marker.addListener('click', function() {
+			infowindow.open(map, marker);
+		})
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw3cwcfPXyoh-BiFBC6C5r_IGmgB_Qsao&callback=initMap"
+    async defer></script>
+  </body>
 </html>
